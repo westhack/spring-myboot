@@ -144,7 +144,7 @@ public class GeneratorUtil {
         AutoCodeResultVo res = generateCode(gt, preview, zip);
 
         // 读取你的实体类中的字段，补充生成条件构造分页查询代码【需自行复制控制台打印输出的代码自行覆盖】
-        generatePlus(gt);
+        // generatePlus(gt);
 
         // 根据类名删除生成的代码
         // deleteCode(className);
