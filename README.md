@@ -12,7 +12,7 @@
 
 ### 项目简介 
 
-> spring-myboot 是一个基于 [vue](https://vuejs.org) 和 [SpringBoot](https://spring.io/) JPA + Mybatis-Plus 任意切换，开发的全栈前后端分离的后台管理系统，集成jwt鉴权，动态路由，动态菜单，Spring Security 鉴权，表单生成器，代码生成器等功能，提供多种示例文件，让您把更多时间专注在业务开发上。
+> spring-myboot 是一个基于 [vue](https://vuejs.org) 和 [SpringBoot](https://spring.io/)，开发的全栈前后端分离的后台管理系统，集成jwt鉴权，JPA + Mybatis-Plus 任意切换，动态路由，动态菜单，Spring Security 鉴权，表单生成器，代码生成器等功能，提供多种示例文件，让您把更多时间专注在业务开发上。
 
 
 #### 相关项目
