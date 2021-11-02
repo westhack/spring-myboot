@@ -1,0 +1,14 @@
+package ${entity.servicePackage};
+
+import com.limaopu.myboot.core.base.BaseService;
+import ${entity.entityPackage}.${entity.className};
+
+import java.util.List;
+
+/**
+ * ${entity.description}接口
+ * @author ${entity.author}
+ */
+public interface ${entity.className}Service extends BaseService<${entity.className}, ${entity.primaryKeyType}> {
+
+}

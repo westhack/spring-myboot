@@ -1,0 +1,9 @@
+{
+  "name": "myboot-module-system",
+  "title": "用户模块",
+  "version": "0.0.1",
+  "description": "用户模块",
+  "author": "westhack",
+  "dependencies": {},
+  "devDependencies": {}
+}

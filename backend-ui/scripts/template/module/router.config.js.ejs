@@ -1,0 +1,26 @@
+// eslint-disable-next-line
+import { RouteView } from '@/layouts'
+
+const <%= camelCaseName %>Router = {
+  path: '/<%= name %>',
+  redirect: '/<%= name %>/view1',
+  component: RouteView,
+  hidden: false,
+  meta: { title: '<%= title %>', icon: 'form' },
+  children: [
+    {
+      path: 'view1',
+      name: '<%= camelCaseName %>View1',
+      component: () => import('@/modules/<%= name %>/views/view1.vue'),
+      meta: { title: '<%= title %> View1', keepAlive: true }
+    },
+    {
+      path: 'view2',
+      name: '<%= camelCaseName %>View2',
+      component: () => import('@/modules/<%= name %>/views/view2.vue'),
+      meta: { title: '<%= title %> View2', keepAlive: true }
+    }
+  ]
+}
+
+export default <%= camelCaseName %>Router

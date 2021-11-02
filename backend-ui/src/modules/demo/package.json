@@ -1,0 +1,9 @@
+{
+  "name": "myboot-module-demo",
+  "title": "demo",
+  "version": "1.0.0",
+  "description": "demo",
+  "author": "demo",
+  "dependencies": {},
+  "devDependencies": {}
+}

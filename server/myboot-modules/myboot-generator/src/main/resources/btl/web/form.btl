@@ -1,0 +1,82 @@
+import context from '@/main'
+
+export const defaultSearchFormData = [
+<%
+    if(entity.entityFields != null){
+    for(entityField in entity.entityFields){
+    if(entityField != null && entityField.fieldSearchType != ''){ %>
+   {
+     label: '${entityField.fieldDesc}',
+     name: '${entityField.fieldJson}',
+     type: '${entityField.inputType}',
+     value: null,
+     operator: '${entityField.fieldSearchType}',
+   },
+    <%
+    }
+    }
+    }
+    %>
+]
+
+export const defaultFormData = [
+<%
+    if(entity.entityFields != null){
+    for(entityField in entity.entityFields){
+    if(entityField != null && entityField.inputType != ''){ %>
+   {
+     label: '${entityField.fieldDesc}',
+     name: '${entityField.fieldJson}',
+     type: '${entityField.inputType}',
+     value: null,
+     rules: [<%  if(entityField.inputRules != null) { for(rule in entityField.inputRules){ %> ${rule}, <% } } %>]
+   },
+    <%
+    }
+    }
+    }
+    %>
+]
+
+export const columns = [
+  {
+    title: '#',
+    scopedSlots: { customRender: 'serial' },
+    width: '50px',
+    align: 'center',
+    dataIndex: 'no',
+    type: 'hidden'
+  },
+<%
+    if(entity.entityFields != null){
+    for(entityField in entity.entityFields){
+    if(entityField != null){ %>
+   {
+     title: '${entityField.fieldDesc}',
+     dataIndex: '${entityField.fieldJson}',
+     align: '${entityField.tableAlign}',
+     width: '${entityField.tableWidth}',
+     type: '${entityField.inputType}',
+     value: null,
+     editable: <% if(entityField.inputType != ''){ %>true<% } %>,
+
+     isSearch: <% if(entityField.FieldSearchType != ''){ %>true<% } %>,
+
+     isForm:  <% if(entityField.inputType != ''){ %>true<% } %>,
+
+     hiddenPopover: ${entityField.hiddenPopover}
+   },
+    <%
+    }
+    }
+    }
+    %>
+  {
+    title: '操作',
+    width: '100px',
+    dataIndex: 'action',
+    scopedSlots: { customRender: 'action' },
+    align: 'center',
+    fixed: 'right'
+  }
+]

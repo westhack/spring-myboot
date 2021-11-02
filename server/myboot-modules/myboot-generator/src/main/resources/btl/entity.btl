@@ -1,0 +1,95 @@
+package ${entity.entityPackage};
+
+import com.limaopu.myboot.core.base.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel;
+import lombok.Data;
+import lombok.experimental.Accessors;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.math.BigDecimal;
+import java.util.*;
+import javax.persistence.Column;
+
+<%
+if(entity.isTree){
+%>
+import org.springframework.data.annotation.Transient;
+import com.baomidou.mybatisplus.annotation.TableField;
+
+import javax.persistence.Column;
+import java.math.BigDecimal;
+<%
+}
+%>
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * @author ${entity.author}
+ */
+@Data
+@Accessors(chain = true)
+@Entity
+@DynamicInsert
+@DynamicUpdate
+@Table(name = "${entity.tableName}")
+@TableName("${entity.tableName}")
+@ApiModel(value = "${entity.description}")
+public class ${entity.className} extends BaseEntity {
+
+    private static final long serialVersionUID = 1L;
+
+    <%
+    if(entity.isTree){
+    %>
+    @ApiModelProperty(value = "分类名称")
+    private String title;
+
+    @ApiModelProperty(value = "父id")
+    @Column(nullable = false)
+    private String parentId;
+
+    @ApiModelProperty(value = "是否为父节点(含子节点) 默认false")
+    private Boolean isParent = false;
+
+    @ApiModelProperty(value = "排序值")
+    @Column(precision = 10, scale = 2)
+    private BigDecimal sortOrder;
+
+    @Transient
+    @TableField(exist=false)
+    @ApiModelProperty(value = "父节点名称")
+    private String parentTitle;
+    <%
+    }
+    %>
+
+    <%
+    if(entity.entityFields != null){
+    for(entityField in entity.entityFields){
+    if(entityField != null && !(entityField.fieldName == "id" || entityField.fieldName == "createdAt" || entityField.fieldName == "createdBy" || entityField.fieldName == "updatedAt" || entityField.fieldName == "updatedBy" || entityField.fieldName == "deletedAt")){
+    if(entityField.fieldType == 'BigDecimal'){
+    %>
+    @Column(precision = 10, scale = 2)
+    <%
+     }else if(entityField.fieldType == 'Long'){
+    %>
+    @Column(length = 20)
+    <%
+    }else{
+    }
+
+    %>
+    @ApiModelProperty(value = "${entityField.fieldDesc}")
+    @JsonProperty("${entityField.fieldJson}")
+    private ${entityField.fieldType} ${entityField.fieldName};
+
+    <%
+    }
+    }
+    }
+    %>
+}

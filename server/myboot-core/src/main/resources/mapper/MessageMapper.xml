@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.limaopu.myboot.core.dao.mapper.MessageMapper">
+
+    <select id="selectPageByUserIdAndStatus" resultType="com.limaopu.myboot.core.entity.Message">
+
+        SELECT DISTINCT m.id, m.title, m.created_at, m.content, m.type, m.data, m.data_type, m.data_id, m.user_id,
+        m.from_user_id, m.status, m.view_time
+        FROM sys_messages m
+        WHERE ( m.user_id = #{userId} )
+        <if test='status == 0'>
+            AND
+            m.status = 0
+        </if>
+        <if test='status == 1'>
+            AND
+            m.status = 1
+        </if>
+        ORDER BY m.created_At DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countByUserIdAndStatus" resultType="java.lang.Integer">
+
+        SELECT COUNT(*)
+        FROM sys_messages m
+        WHERE ( m.user_id = #{userId} )
+        <if test='status == 0'>
+            AND
+            m.status = 0
+        </if>
+        <if test='status == 1'>
+            AND
+            m.status = 1
+        </if>
+    </select>
+</mapper>

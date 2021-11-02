@@ -1,0 +1,6 @@
+alidy:
+  accessKeyId: yourAccessKeyId
+  accessKeySecret: yourAccessKeySecret
+  signName: yourBucketName
+  templateCode: yourBucketUrl
+  templateParam: yourBasePath

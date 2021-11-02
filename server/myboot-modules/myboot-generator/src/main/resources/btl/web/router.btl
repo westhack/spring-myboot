@@ -1,0 +1,12 @@
+// eslint-disable-next-line
+import { RouteView } from '@/layouts'
+
+const ${entity.classNameLowerCase}Router =
+  {
+    path: '${entity.modulePackage}/${entity.classNameLowerCase}',
+    name: '${entity.modulePackage}${entity.className}',
+    component: () => import('@/modules/${entity.modulePackage}/views/${entity.classNameLowerCase}/table.vue'),
+    meta: { title: '${entity.description}', icon: 'menu', keepAlive: true, permission: [] }
+  }
+
+export default ${entity.classNameLowerCase}Router

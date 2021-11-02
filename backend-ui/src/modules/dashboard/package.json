@@ -1,0 +1,9 @@
+{
+  "name": "myboot-module-dashboard",
+  "title": "dashboard",
+  "version": "1.0.0",
+  "description": "dashboard",
+  "author": "westhack",
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,0 +1,9 @@
+{
+  "name": "myboot-module-storage",
+  "title": "存储模块",
+  "version": "0.0.1",
+  "description": "存储模块",
+  "author": "westhack",
+  "dependencies": {},
+  "devDependencies": {}
+}

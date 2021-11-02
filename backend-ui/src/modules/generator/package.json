@@ -1,0 +1,9 @@
+{
+  "name": "myboot-module-generator",
+  "title": "页面生成器",
+  "version": "1.0.0",
+  "description": "页面生成器",
+  "author": "westhack",
+  "dependencies": {},
+  "devDependencies": {}
+}

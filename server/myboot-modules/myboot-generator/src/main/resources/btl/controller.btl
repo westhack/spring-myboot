@@ -1,0 +1,104 @@
+package ${entity.controllerPackage};
+
+import com.limaopu.myboot.core.common.utils.PageUtil;
+import com.limaopu.myboot.core.common.utils.ResultUtil;
+import com.limaopu.myboot.core.common.vo.*;
+import ${entity.entityPackage}.${entity.className};
+import ${entity.servicePackage}.${entity.className}Service;
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Arrays;
+
+/**
+ * @author ${entity.author}
+ */
+@Slf4j
+@RestController
+@Api(tags = "${entity.description}管理接口")
+@RequestMapping("/api/${entity.modulePackage}/${entity.classNameLowerCase}")
+@Transactional
+public class ${entity.className}Controller {
+
+    @Autowired
+    private ${entity.className}Service ${entity.classNameLowerCase}Service;
+
+    public ${entity.className}Service getService() {
+        return ${entity.classNameLowerCase}Service;
+    }
+
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    @ApiOperation(value = "通过id获取")
+    public Result<${entity.className}> get(@RequestParam ${entity.primaryKeyType} id) {
+        ${entity.className} ${entity.classNameLowerCase} = ${entity.classNameLowerCase}Service.getById(id);
+        return new ResultUtil<${entity.className}>().setData(${entity.classNameLowerCase});
+    }
+
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    @ApiOperation(value = "获取全部数据")
+    public Result<List<${entity.className}>> getAll() {
+
+        List<${entity.className}> list = ${entity.classNameLowerCase}Service.list();
+        return new ResultUtil<List<${entity.className}>>().setData(list);
+    }
+
+    @RequestMapping(value = "/getList", method = RequestMethod.POST)
+    @ApiOperation(value = "分页获取")
+    public  Result<Object> getList(@RequestBody(required = false) PageVo pageVo) {
+
+        PageResultVo<${entity.className}> data = ${entity.classNameLowerCase}Service.search(pageVo);
+
+        return ResultUtil.data(data);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ApiOperation(value = "编辑或更新数据")
+    public Result<${entity.className}> update(@RequestBody @Valid ${entity.className} ${entity.classNameLowerCase}) {
+
+        if (${entity.classNameLowerCase}Service.updateById(${entity.classNameLowerCase})) {
+            return new ResultUtil<${entity.className}>().setData(${entity.classNameLowerCase});
+        }
+        return new ResultUtil<${entity.className}>().setErrorMsg("操作失败");
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ApiOperation(value = "编辑或更新数据")
+    public Result<${entity.className}> create(@RequestBody @Valid ${entity.className} ${entity.classNameLowerCase}) {
+
+        if (${entity.classNameLowerCase}Service.save(${entity.classNameLowerCase})) {
+            return new ResultUtil<${entity.className}>().setData(${entity.classNameLowerCase});
+        }
+        return new ResultUtil<${entity.className}>().setErrorMsg("操作失败");
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ApiOperation(value = "批量通过id删除")
+    public Result<Object> delete(@RequestBody @Valid GetByIdVo<${entity.primaryKeyType}> id) {
+
+        if (${entity.classNameLowerCase}Service.removeById(id.getId())) {
+            return ResultUtil.success("通过id删除数据成功");
+        }
+
+        return ResultUtil.error("删除数据失败");
+    }
+
+    @RequestMapping(value = "/deleteByIds", method = RequestMethod.POST)
+    @ApiOperation(value = "批量通过id删除")
+    public Result<Object> deleteByIds(@RequestBody @Valid GetByIdsVo<${entity.primaryKeyType}> ids) {
+
+        if (${entity.classNameLowerCase}Service.removeByIds(Arrays.asList(ids.getId()))) {
+            return ResultUtil.success("批量通过id删除数据成功");
+        }
+
+        return ResultUtil.error("删除数据失败");
+    }
+}

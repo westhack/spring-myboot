@@ -1,0 +1,8 @@
+// 本文件是自动生成, 请勿修改
+<% modules.forEach(function(module){ %>import <%= module.camelCaseName %> from '@/module/<%= module.name %>/router.config'
+<% }); %>
+const modulesConfig = [
+<% modules.forEach(function(module){ %>  <%= module.camelCaseName %>,
+<% }); %>]
+
+export default modulesConfig
