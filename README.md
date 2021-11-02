@@ -32,7 +32,7 @@
 - Maven：>=3.x
 ```
 
-#### server项目
+### server项目
 
 使用 `Idea` 等编辑工具，打开server目录，不可以打开 spring-myboot 根目录
 
