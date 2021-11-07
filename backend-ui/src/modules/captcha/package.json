@@ -1,0 +1,11 @@
+{
+  "name": "myboot-module-captcha",
+  "title": "captcha",
+  "version": "1.0.0",
+  "description": "captcha",
+  "author": "westhack",
+  "dependencies": {
+    "crypto-js": "^4.0.0"
+  },
+  "devDependencies": {}
+}

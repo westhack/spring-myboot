@@ -1,0 +1,3 @@
+com.limaopu.myboot.captcha.anji.service.impl.BlockPuzzleCaptchaServiceImpl
+com.limaopu.myboot.captcha.anji.service.impl.ClickWordCaptchaServiceImpl
+com.limaopu.myboot.captcha.anji.service.impl.DefaultCaptchaServiceImpl

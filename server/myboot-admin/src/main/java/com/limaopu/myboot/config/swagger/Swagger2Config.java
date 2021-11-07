@@ -45,7 +45,7 @@ public class Swagger2Config {
     @Value("${swagger.group:MyBoot v1.0}")
     private String group;
 
-    @Value("${swagger.contact.name:Exrick}")
+    @Value("${swagger.contact.name:xxx}")
     private String name;
 
     @Value("${swagger.contact.url:http://limaopu.com}")

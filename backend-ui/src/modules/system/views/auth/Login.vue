@@ -83,7 +83,7 @@
                 class="getCaptcha"
                 tabindex="-1"
                 :disabled="state.smsSendBtn"
-                @click.stop.prevent="getCaptcha"
+                @click.stop.prevent="showVerifyBox"
                 v-text="!state.smsSendBtn && '获取验证码' || (state.time+' s')"
               ></a-button>
             </a-col>
@@ -132,6 +132,14 @@
       @success="stepCaptchaSuccess"
       @cancel="stepCaptchaCancel"
     ></two-step-captcha>
+
+    <Verify
+      ref="verify"
+      :mode="'pop'"
+      :captcha-type="'blockPuzzle'"
+      :img-size="{ width: '330px', height: '155px' }"
+      @success="verifySuccess"
+    />
   </div>
 </template>
 
@@ -141,10 +149,13 @@ import TwoStepCaptcha from '@/components/Tools/TwoStepCaptcha'
 import { mapActions } from 'vuex'
 import { timeFix } from '@/utils/util'
 import { getSmsCaptcha, getImgCaptcha } from '@/modules/system/api/auth'
+import Verify from '@/modules/captcha/components/verifition/Verify'
+import { httpResponseCode } from '@/constants/httpResponseCode'
 
 export default {
   components: {
-    TwoStepCaptcha
+    TwoStepCaptcha,
+    Verify
   },
   data () {
     return {
@@ -156,6 +167,7 @@ export default {
       stepCaptchaVisible: false,
       form: this.$form.createForm(this),
       rememberMe: false,
+      captchaVerification: '',
       state: {
         time: 60,
         loginBtn: false,
@@ -174,13 +186,6 @@ export default {
     }
   },
   created () {
-    // get2step({ })
-    //   .then(res => {
-    //     this.requiredTwoStepCaptcha = res.result.stepCode
-    //   })
-    //   .catch(() => {
-    //     this.requiredTwoStepCaptcha = false
-    //   })
     this.getImgCaptcha()
     this.requiredTwoStepCaptcha = true
   },
@@ -237,7 +242,7 @@ export default {
       })
     },
     getCaptcha (e) {
-      e.preventDefault()
+      e && e.preventDefault()
       const { form: { validateFields }, state } = this
 
       validateFields(['mobile'], { force: true }, (err, values) => {
@@ -253,13 +258,21 @@ export default {
           }, 1000)
 
           const hide = this.$message.loading('验证码发送中..', 0)
-          getSmsCaptcha({ mobile: values.mobile, key: 'login' }).then(res => {
-            setTimeout(hide, 2500)
-            this.$notification['success']({
-              message: '提示',
-              description: '验证码获取成功，您的验证码为：' + res.data.smsCode,
-              duration: 8
-            })
+          getSmsCaptcha({ mobile: values.mobile, key: 'login', captchaVerification: this.captchaVerification }).then(res => {
+            if (res.code == httpResponseCode.SUCCESS) {
+              setTimeout(hide, 2500)
+              this.$notification['success']({
+                message: '提示',
+                description: '验证码获取成功，您的验证码为：' + res.data.smsCode,
+                duration: 8
+              })
+            } else {
+              setTimeout(hide, 1)
+              clearInterval(interval)
+              state.time = 60
+              state.smsSendBtn = false
+              this.$message.error(res.message)
+            }
           }).catch(err => {
             setTimeout(hide, 1)
             clearInterval(interval)
@@ -307,6 +320,18 @@ export default {
     },
     forgePassword () {
       this.$message.info('请联系管理员')
+    },
+    showVerifyBox () {
+      const mobile = this.form.getFieldValue('mobile')
+      if (mobile != undefined && mobile != '') {
+        this.$refs.verify.show()
+      } else {
+        this.$message.error('请输入手机号')
+      }
+    },
+    verifySuccess (v) {
+      this.captchaVerification = v.captchaVerification
+      this.getCaptcha()
     }
   }
 }

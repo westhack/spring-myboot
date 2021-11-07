@@ -121,6 +121,6 @@ yarn serve || npm serve
 - 配置管理：配置文件可前台修改。
 - 缓存管理：管理reids缓存。
 - 条件搜索：动态自定义多条件搜索。
-- 分片长传：提供文件分片上传和大文件分片上传功能示例。
+- 支持滑块验证码，图片验证码，短信验证码。
 - 表单生成器：参考 [/backend-ui/src/modules/demo/views/view1.vue](https://github.com/westhack/gin-myboot/blob/master/backend-ui/src/modules/demo/views/view1.vue) 。
 - 代码生成器：后台基础逻辑以及简单curd的代码生成器。

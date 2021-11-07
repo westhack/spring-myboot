@@ -15,10 +15,7 @@ import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,7 +25,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @Api(tags = "定时任务管理接口")
-@RequestMapping("/myboot/quartzJob")
+@RequestMapping("/api/jobs/quartzJob")
 @Transactional
 public class QuartzJobController {
 
@@ -38,17 +35,17 @@ public class QuartzJobController {
     @Autowired
     private Scheduler scheduler;
 
-    @RequestMapping(value = "/getAllByPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
     @ApiOperation(value = "获取所有定时任务")
-    public Result<Page<QuartzJob>> getAllByPage(String key, PageVo page) {
+    public Result<Page<QuartzJob>> getList(String key, PageVo page) {
 
         Page<QuartzJob> data = quartzJobService.findByCondition(key, PageUtil.initPage(page));
         return new ResultUtil<Page<QuartzJob>>().setData(data);
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ApiOperation(value = "添加定时任务")
-    public Result<Object> addJob(QuartzJob job) {
+    public Result<Object> create(@RequestBody QuartzJob job) {
 
         List<QuartzJob> list = quartzJobService.findByJobClassName(job.getJobClassName());
         if (list != null && list.size() > 0) {
@@ -59,9 +56,9 @@ public class QuartzJobController {
         return ResultUtil.success("创建定时任务成功");
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ApiOperation(value = "更新定时任务")
-    public Result<Object> editJob(QuartzJob job) {
+    public Result<Object> update(@RequestBody QuartzJob job) {
 
         delete(job.getJobClassName());
         add(job.getJobClassName(), job.getCronExpression(), job.getParameter());
@@ -72,7 +69,7 @@ public class QuartzJobController {
 
     @RequestMapping(value = "/pause", method = RequestMethod.POST)
     @ApiOperation(value = "暂停定时任务")
-    public Result<Object> pauseJob(QuartzJob job) {
+    public Result<Object> pauseJob(@RequestBody QuartzJob job) {
 
         try {
             scheduler.pauseJob(JobKey.jobKey(job.getJobClassName()));
@@ -86,7 +83,7 @@ public class QuartzJobController {
 
     @RequestMapping(value = "/resume", method = RequestMethod.POST)
     @ApiOperation(value = "恢复定时任务")
-    public Result<Object> resumeJob(QuartzJob job) {
+    public Result<Object> resumeJob(@RequestBody QuartzJob job) {
 
         try {
             scheduler.resumeJob(JobKey.jobKey(job.getJobClassName()));
@@ -98,12 +95,12 @@ public class QuartzJobController {
         return ResultUtil.success("恢复定时任务成功");
     }
 
-    @RequestMapping(value = "/delByIds", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteByIds", method = RequestMethod.POST)
     @ApiOperation(value = "删除定时任务")
-    public Result<Object> deleteJob(@RequestParam String[] ids) {
+    public Result<Object> deleteByIds(@RequestBody Long[] id) {
 
-        for (String id : ids) {
-            QuartzJob job = quartzJobService.get(id);
+        for (Long d : id) {
+            QuartzJob job = quartzJobService.get(d);
             delete(job.getJobClassName());
             quartzJobService.delete(job);
         }

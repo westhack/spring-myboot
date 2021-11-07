@@ -213,6 +213,8 @@ captcha:
   image:
     - /myboot/oauth2/authorize # 认证接口
   sms:
+  vaptcha:
+    - /api/v1/common/captcha/sendSms # 获取短信验证码
 
 # 忽略url
 ignored:
@@ -241,6 +243,8 @@ ignored:
     - /api/v1/common/auth/register
     - /api/storage/upload/view/**
     - /api/generator/**
+    - /api/captcha/get
+    - /api/captcha/check
   # 限流及黑名单不拦截的路径
   limitUrls:
     - /**/*.js

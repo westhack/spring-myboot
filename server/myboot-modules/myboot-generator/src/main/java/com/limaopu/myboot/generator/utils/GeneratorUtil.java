@@ -76,7 +76,7 @@ public class GeneratorUtil {
      * 生成模块路径
      * (文件自动生成至该模块下)
      */
-    public String MODULE = "/myboot-modules/myboot-base";
+    public String MODULE = "/myboot-modules/myboot-system";
 
     /**
      * 模块包路径

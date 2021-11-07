@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.limaopu.myboot.base.mapper.DictDetailMapper">
-    <select id="findByDictId" parameterType="Long" resultType="com.limaopu.myboot.base.entity.DictDetail">
-        select * from sys_dict_details where dict_id = #{dictId}
-    </select>
-</mapper>

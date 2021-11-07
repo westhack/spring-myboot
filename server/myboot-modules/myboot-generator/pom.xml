@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>com.limaopu</groupId>
-            <artifactId>myboot-base</artifactId>
+            <artifactId>myboot-system</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

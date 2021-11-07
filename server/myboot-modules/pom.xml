@@ -12,7 +12,10 @@
     <artifactId>myboot-modules</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>myboot-base</module>
+        <module>myboot-common</module>
+        <module>myboot-storage</module>
+        <module>myboot-captcha</module>
+        <module>myboot-system</module>
         <module>myboot-quartz</module>
         <module>myboot-generator</module>
         <module>myboot-open</module>

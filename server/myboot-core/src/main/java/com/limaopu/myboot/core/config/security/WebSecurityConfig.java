@@ -7,6 +7,7 @@ import com.limaopu.myboot.core.config.security.jwt.AuthenticationSuccessHandler;
 import com.limaopu.myboot.core.config.security.jwt.JWTAuthenticationFilter;
 import com.limaopu.myboot.core.config.security.jwt.RestAccessDeniedHandler;
 import com.limaopu.myboot.core.config.security.permission.MyFilterSecurityInterceptor;
+import com.limaopu.myboot.core.config.security.validate.CaptchaValidateFilter;
 import com.limaopu.myboot.core.config.security.validate.ImageValidateFilter;
 import com.limaopu.myboot.core.common.redis.RedisTemplateHelper;
 import com.limaopu.myboot.core.common.utils.SecurityUtil;
@@ -61,6 +62,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private SmsCodeValidateFilter smsCodeValidateFilter;
+
+    @Autowired
+    private CaptchaValidateFilter captchaValidateFilter;
 
     @Autowired
     private RedisTemplateHelper redisTemplate;
@@ -124,6 +128,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(imageValidateFilter, UsernamePasswordAuthenticationFilter.class)
                 // 手机验证码过滤器
                 .addFilterBefore(smsCodeValidateFilter, UsernamePasswordAuthenticationFilter.class)
+                // 滑块验证码过滤器
+                .addFilterBefore(captchaValidateFilter, UsernamePasswordAuthenticationFilter.class)
                 // 添加JWT过滤器 除已配置的其它请求都需经过此过滤器
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(), tokenProperties, redisTemplate, securityUtil));
 

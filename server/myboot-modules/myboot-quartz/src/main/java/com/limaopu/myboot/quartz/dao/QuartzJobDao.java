@@ -9,7 +9,7 @@ import java.util.List;
  * 定时任务数据处理层
  * 
  */
-public interface QuartzJobDao extends MyBootBaseDao<QuartzJob, String> {
+public interface QuartzJobDao extends MyBootBaseDao<QuartzJob, Long> {
 
     /**
      * 通过类名获取

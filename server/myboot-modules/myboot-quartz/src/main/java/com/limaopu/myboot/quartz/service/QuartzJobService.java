@@ -12,7 +12,7 @@ import java.util.List;
  * 定时任务接口
  * 
  */
-public interface QuartzJobService extends MyBootBaseService<QuartzJob, String> {
+public interface QuartzJobService extends MyBootBaseService<QuartzJob, Long> {
 
     /**
      * 通过类名获取

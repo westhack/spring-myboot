@@ -16,7 +16,22 @@
         <!-- 引入功能模块 -->
         <dependency>
             <groupId>com.limaopu</groupId>
-            <artifactId>myboot-base</artifactId>
+            <artifactId>myboot-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.limaopu</groupId>
+            <artifactId>myboot-captcha</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.limaopu</groupId>
+            <artifactId>myboot-storage</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.limaopu</groupId>
+            <artifactId>myboot-system</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

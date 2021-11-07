@@ -1,0 +1,2 @@
+com.limaopu.myboot.captcha.anji.service.impl.CaptchaCacheServiceRedisImpl
+com.limaopu.myboot.captcha.anji.service.impl.CaptchaCacheServiceMemImpl
