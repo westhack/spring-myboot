@@ -25,13 +25,6 @@ export default {
   mounted () {
     const { $store } = this
 
-    // const dict = storage.get('DICT')
-    // if (dict) {
-    //   $store.commit('SET_DICT', dict)
-    // } else {
-    $store.dispatch('DictAll')
-    // }
-
     deviceEnquire(deviceType => {
       switch (deviceType) {
         case DEVICE_TYPE.DESKTOP:

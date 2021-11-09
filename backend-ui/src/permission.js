@@ -63,11 +63,17 @@ router.beforeEach((to, from, next) => {
             }
           })
       } else {
+        // const dict = storage.get('DICT')
+        // if (dict) {
+        //   $store.commit('SET_DICT', dict)
+        // } else {
+        store.dispatch('DictAll')
+        // }
+        store.dispatch('GetUserMessages')
         next()
       }
     }
 
-    store.dispatch('GetUserMessages')
   } else {
     console.log(to.name)
     if (whiteList.includes(to.name)) {

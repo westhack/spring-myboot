@@ -83,11 +83,11 @@ public class UploadController extends BaseController<UploadFile, Long> {
         if (ossType.equals(CommonConstant.UPLOAD_QINIU)) {
             return qiniu(file);
         } else {
-            return loacl(file);
+            return local(file);
         }
     }
 
-    private Result<Object> loacl(MultipartFile file) {
+    private Result<Object> local(MultipartFile file) {
         User user = securityUtil.getUser();
         Long userId = 0L;
         if (user != null) {
@@ -149,7 +149,7 @@ public class UploadController extends BaseController<UploadFile, Long> {
         } catch (Exception e) {
             log.error(e.toString());
             // 七牛失败 走本地
-            return loacl(file);
+            return local(file);
         }
     }
 

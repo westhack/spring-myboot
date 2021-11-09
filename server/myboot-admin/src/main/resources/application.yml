@@ -245,6 +245,7 @@ ignored:
     - /api/generator/**
     - /api/captcha/get
     - /api/captcha/check
+    - /test/**
   # 限流及黑名单不拦截的路径
   limitUrls:
     - /**/*.js
